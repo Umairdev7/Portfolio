@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+
+  --color-navy-950: #0b1124;
+  --color-navy-900: #111a33;
+  --color-navy-800: #172243;
+  --color-navy-700: #1f2c55;
+  --color-plum-900: #1c1a37;
+
+  --color-brand-blue: #2f80ff;
+  --color-brand-red: #f0435a;
+  --color-ink: #f4f6fb;
+  --color-muted: #aab3cc;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    background-color: var(--color-navy-900);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-brand-blue);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-blue);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* Blue -> red gradient used for highlights, buttons and borders */
+  .text-gradient {
+    background-image: linear-gradient(90deg, var(--color-brand-blue), #9b5cf6 55%, var(--color-brand-red));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-brand {
+    background-image: linear-gradient(90deg, var(--color-brand-blue), var(--color-brand-red));
+  }
+
+  /* Alternate section background: navy fading into a plum/red tint, as in the design */
+  .section-tinted {
+    background:
+      radial-gradient(60% 80% at 100% 100%, rgb(240 67 90 / 0.12), transparent 70%),
+      linear-gradient(135deg, var(--color-navy-800), var(--color-plum-900));
+  }
+
+  /* Card with a thin blue/red gradient border */
+  .card-glow {
+    position: relative;
+    border-radius: 0.75rem;
+    background:
+      linear-gradient(160deg, rgb(31 44 85 / 0.9), rgb(28 26 55 / 0.9)) padding-box,
+      linear-gradient(135deg, rgb(47 128 255 / 0.7), rgb(240 67 90 / 0.7)) border-box;
+    border: 1px solid transparent;
+  }
+
+  .field {
+    width: 100%;
+    border-radius: 9999px;
+    border: 1px solid rgb(47 128 255 / 0.45);
+    background: transparent;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field::placeholder {
+    color: rgb(170 179 204 / 0.6);
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-brand-blue);
+    box-shadow: 0 0 0 3px rgb(47 128 255 / 0.25);
+  }
+  .field[aria-invalid="true"] {
+    border-color: var(--color-brand-red);
+  }
+}
+
+/* Scroll reveal — only hides content once JS is running (the `js` class is set in layout.tsx) */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-float { animation: none; }
+}
