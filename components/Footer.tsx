@@ -3,7 +3,12 @@ import { navLinks, profile } from "@/lib/data";
 
 const socials = [
   { label: "Email", href: `mailto:${profile.email}`, Icon: FiMail },
-  { label: "LinkedIn", href: profile.linkedin, Icon: FiLinkedin, external: true },
+  {
+    label: "LinkedIn",
+    href: profile.linkedin,
+    Icon: FiLinkedin,
+    external: true,
+  },
 ];
 
 export default function Footer() {
@@ -18,7 +23,10 @@ export default function Footer() {
             <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
               {navLinks.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="inline-block py-1.5 text-ink/80 hover:text-brand-blue">
+                  <a
+                    href={l.href}
+                    className="inline-block py-1.5 text-ink/80 hover:text-brand-blue"
+                  >
                     {l.label}
                   </a>
                 </li>
@@ -31,7 +39,9 @@ export default function Footer() {
                 <a
                   href={href}
                   aria-label={label}
-                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                   className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-blue text-white transition hover:-translate-y-0.5 hover:bg-brand-red"
                 >
                   <Icon aria-hidden />
@@ -41,8 +51,14 @@ export default function Footer() {
           </ul>
         </div>
         <div className="flex flex-col items-center justify-between gap-3 pt-6 text-xs text-muted sm:flex-row">
-          <p>Copyright © {new Date().getFullYear()} {profile.name} | All Rights Reserved</p>
-          <a href="#home" className="inline-flex items-center gap-1 hover:text-brand-blue">
+          <p>
+            Copyright © {new Date().getFullYear()} {profile.name} | All Rights
+            Reserved
+          </p>
+          <a
+            href="#home"
+            className="inline-flex items-center gap-1 hover:text-brand-blue"
+          >
             Back to top <FiArrowUp aria-hidden />
           </a>
         </div>
